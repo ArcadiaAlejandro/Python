@@ -168,7 +168,48 @@ print("Python is " + x)
 
 Python is fantastic
 
+---------------------------
+#Valores Nulos
+
+import pandas as pd
+
+data = pd.DataFrame([[20, 1000], [None, 2000], [30, 3000]], columns=['edad', 'ingresos'])
+
+# Detección de valores nulos
+valores_nulos = data.isnull()
+
+# Suma de valores nulos por columna
+cantidad_nulos_por_columna = valores_nulos.sum()
+
+print("Cantidad de valores nulos por columna:")
+print(cantidad_nulos_por_columna)
+
+# Posiciones de los valores nulos
+posiciones_nulos = {}
+for columna in data.columns:
+    posiciones_nulos[columna] = list(data.index[data[columna].isnull()])
+
+print("\nPosiciones de los valores nulos por columna:")
+print(posiciones_nulos)
+
+-----------------------
+
+#Tratamiento de valores nulos
+
+base = pd.read_csv("https://raw.githubusercontent.com/PacktWorkshops/The-Pandas-Workshop/master/Chapter07/Data/deletion.csv")
+base
+base.isnull().sum()
+
+import seaborn as sns #forma visual de ver los valores nulos
+sns.heatmap(base.isnull())
+
+#Imputacion
+
+base["population"].fillna(base["population"].mean(), inplace = True)
+base
+
 """
+
 
 
 
